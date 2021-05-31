@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flaskdemo-deployment
+  labels:
+    app: flaskdemo
+spec:
+  selector:
+    matchLabels:
+      app: flaskdemo
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: flaskdemo
+    spec:
+      containers:
+        - name: flaskdemo
+          image: sharran/flaskdemo:v3
+          resources:
+            limits:
+              memory: "500Mi"
+              cpu: "250m"
+          ports:
+            - containerPort: 4000
+---
+#External Service configuration
+apiVersion: v1
+kind: Service
+metadata:
+  name: flaskdemo-service
+spec:
+  selector:
+    app: flaskdemo
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 4000
+      targetPort: 4000
+      nodePort: 30000
+---
+#Horizontal Pod Autoscaler configuration
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: flaskdemo-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: flaskdemo-deployment
+  minReplicas: 1
+  maxReplicas: 4
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: 50
