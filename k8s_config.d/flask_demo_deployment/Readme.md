@@ -1,4 +1,4 @@
-# Flask minikube cluster in macOS
+# Flask minikube cluster
 
 
 _**Prerequisites**: Install kubectl and minikube_
