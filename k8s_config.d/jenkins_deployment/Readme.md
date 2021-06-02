@@ -1,4 +1,4 @@
-# Jenkins minikube cluster in macOS using helm chart
+# Jenkins minikube cluster using helm chart
 
 _**Prerequisites**: Install helm, kubectl and minikube_
 
