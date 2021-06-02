@@ -1,4 +1,4 @@
-# Gitlab minikube cluster in macOS using helm chart
+# Gitlab minikube cluster using helm chart
 
 _**Prerequisites**: Install helm, kubectl and minikube_
 
