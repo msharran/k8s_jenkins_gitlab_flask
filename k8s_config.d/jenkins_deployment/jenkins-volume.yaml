@@ -11,4 +11,4 @@ spec:
     storage: 10Gi
   persistentVolumeReclaimPolicy: Retain
   hostPath:
-    path: ~/tmp/jenkins-volume/
+    path: /data/jenkins-volume/

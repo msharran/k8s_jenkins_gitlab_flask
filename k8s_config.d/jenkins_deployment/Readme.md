@@ -9,7 +9,6 @@ kubectl apply -f jenkins-namespace.yaml
 
 - Create a dedicated volume in local system for dev purpose
 ```bash
-sudo mkdir -p ~/tmp/jenkins-volume/
 kubectl apply -f jenkins-volume.yaml
 ```
 
